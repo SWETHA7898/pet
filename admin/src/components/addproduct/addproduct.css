@@ -1,0 +1,103 @@
+.add-product {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 800px;
+    padding: 30px 50px;
+    margin: 20px auto; /* Centering the form */
+    border-radius: 6px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Added slight shadow */
+}
+
+.additemfields {
+    width: 100%;
+    color: #333333;
+    font-size: 16px;
+    margin-bottom: 15px; /* Added spacing between fields */
+}
+
+/* Input fields */
+.additemfields input,
+.additemfields textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 4px;
+    border: 1px solid #c3c3c3;
+    box-sizing: border-box;
+    outline: none;
+    color: #7b7b7b;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+/* Description field */
+.additemfields textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Price section */
+.addprice {
+    display: flex;
+    gap: 40px;
+}
+
+/* Dropdown */
+.additemselector {
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    color: #7b7b7b;
+    border: 1px solid #7b7b7b8d;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Image upload */
+.addproduct {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+    border-radius: 10px;
+    margin: 10px 0px;
+    border: 1px dashed #c3c3c3;
+    padding: 10px;
+}
+
+/* Add button */
+.addbutton {
+    margin-top: 20px;
+    width: 160px;
+    height: 50px;
+    border-radius: 6px;
+    background-color: #F28D8D;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.addbutton:hover {
+    background-color: #e47777;
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .add-product {
+        margin: 20px;
+        width: auto;
+        padding: 20px;
+    }
+    .addprice {
+        flex-direction: column; /* Stack price fields on small screens */
+        gap: 20px;
+    }
+    .addbutton {
+        width: 100%; /* Make button full-width on smaller screens */
+    }
+}
