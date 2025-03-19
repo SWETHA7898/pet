@@ -1,19 +1,18 @@
 import "./navbar.css"
 import navprofile from "../../assets/Admin_Assets/nav-profile.jpg"
 
-const Navbar=()=>{
+const Navbar=({settoken})=>{
     return (
         <div className="navbar">
             <div>
             <div className="header"> 
            
                Paws<span>&Co</span>
-
-           </div>
+               </div>
           
           
             </div>
-            <img src={navprofile} alt="" style={{width:"50px"}}></img>
+           <button className="logout" onClick={()=>settoken('')}>Logout</button>
 
         </div>
     )

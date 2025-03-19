@@ -5,90 +5,84 @@ import "./Navbar.css";
 import { StoreContext } from "../../context/store";
 import auth from "../../config/firebase";
 import { signOut } from "firebase/auth";
-import axios from "axios";
 
 function Navbar() {
     const navigate = useNavigate();
     const [menu, setMenu] = useState("");
-    const { totalcartitems, cartitem, setCart } = useContext(StoreContext);
-    const [cartCount, setCartCount] = useState(0);
+    const { totalcartitems } = useContext(StoreContext);
     const [log, setLog] = useState(false);
     const menuref = useRef();
 
-   
+ 
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
                 console.log("✅ User logged in");
-                setLog(true)
+                setLog(true);
             } else {
                 console.log("❌ User logged out");
-                setLog(false)
+                setLog(false);
             }
         });
     }, []);
 
     function Logout() {
         signOut(auth).then(() => {
-            localStorage.removeItem("authToken"); 
-            console.log("removed authToken");
-            window.location.replace("/")
-         
-    
+            localStorage.removeItem("authToken");
+            console.log("🔴 User logged out, authToken removed");
+            window.location.replace("/");
         }).catch((error) => {
             console.error("Logout error:", error);
         });
     }
-    
-    const dropdown_toggle=(e)=>{
-        menuref.current.classList.toggle("navmenu-visible")
-        e.target.classList.toggle("open")
 
-    }
-    
+    const dropdown_toggle = (e) => {
+        menuref.current.classList.toggle("navmenu-visible");
+        e.target.classList.toggle("open");
+    };
 
     return (
         <div className="navbar">
-            <div className="header"> 
+            <div className="header">
                 Paws<span>&Co</span>
-                <img onClick={dropdown_toggle} src={assests.nav} alt="" className="nav-dropdown" />
+                <img onClick={dropdown_toggle} src={assests.nav} alt="Menu" className="nav-dropdown" />
             </div>
-            
 
             <ul className="navmenu" ref={menuref}>
-                    <li className={menu === "home" ? "active" : ""} onClick={() =>{setMenu("home");window.scroll(0,0)}}>
-                    <Link to="/">Home</Link>
-                </li>
-                <li className={menu === "dogs" ? "active" : ""} onClick={() =>{ setMenu("dogs");window.scroll(0,0)}}>
-                    <Link to="/dogs">Dogs</Link>
-                </li>
-                <li className={menu === "cats" ? "active" : ""} onClick={() =>{ setMenu("cats"),window.scroll(0,0)}}>
-                    <Link to="/cats">Cats</Link>
-                </li>
-                <li className={menu === "avians" ? "active" : ""} onClick={() => {setMenu("avians",window.scroll(0,0))}}>
-                    <Link to="/avians">Avians</Link>
-                </li>
-                <li className={menu === "fishes" ? "active" : ""} onClick={() => {setMenu("fishes"),window.scroll(0,0)}}>
-                    <Link to="/fishes">Fishes</Link>
-                </li>
+                {["home", "dogs", "cats", "avians", "fishes"].map((category) => (
+                    <li key={category} className={menu === category ? "active" : ""} onClick={() => { setMenu(category); window.scroll(0, 0); }}>
+                        <Link to={`/${category === "home" ? "" : category}`}>{category.charAt(0).toUpperCase() + category.slice(1)}</Link>
+                    </li>
+                ))}
             </ul>
 
             <div className="navright">
                 <div className="cart">
                     <Link to="/cart">
-                    <i class="fa-solid fa-cart-shopping" style={{fontSize:'25px'}}></i>
+                        <i className="fa-solid fa-cart-shopping" style={{ fontSize: "25px" }}></i>
                     </Link>
-                    <div className="dot">{totalcartitems()}</div> 
+                    <div className="dot">{totalcartitems()}</div>
                 </div>
-                {
-                    log?<button onClick={Logout}>LogOut</button>:<button onClick={() => navigate("/login")}>Login</button>
-                }
-               
-               
-                
-                    
-               
+
+                {log ? (
+                    <div className="navbar-profile">
+                        <i class="fa-solid fa-user" style={{color:"#A8DADC",fontSize:"28px"}}></i>
+                        <ul className="nav-profile-dropdown">
+                            <li>
+                            <i class="fa-solid fa-bag-shopping" style={{fontSize:"20px",color:"black"}}></i>
+                                <Link to="/userorder" style={{color:""}}>My Orders</Link>
+                            </li>
+                            <hr />
+                            <li onClick={Logout}>
+                            <i class="fa-solid fa-arrow-right-from-bracket" style={{color:"black"}}></i>
+                                Logout
+                            </li>
+                        </ul>
+                    </div>
+                ) : (
+                    <button onClick={() => navigate("/login")}>Login</button>
+                )}
             </div>
         </div>
     );

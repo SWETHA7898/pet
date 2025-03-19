@@ -8,15 +8,22 @@ const Sidebar=()=>{
         <div className="sidebar">
             <Link to="/addproduct" style={{textDecoration:"none"}}>
             <div className="sideproduct">
-                <img src={addproduct} alt=""></img>
+                  <i class="fa-solid fa-plus" style={{color:"black"}}></i>
                 <p>Add Product</p>
 
             </div>
             </Link>
             <Link to="/listproduct" style={{textDecoration:"none"}}>
             <div className="sideproduct">
-                <img src={listproduct} alt=""></img>
+            <i class="fa-solid fa-list" style={{color:"black"}}></i> 
                 <p>Product List</p>
+
+            </div>
+            </Link>
+            <Link to="/order" style={{textDecoration:"none"}}>
+            <div className="sideproduct">
+            <i class="fa-solid fa-list" style={{color:"black"}}></i> 
+                <p>Orders List</p>
 
             </div>
             </Link>

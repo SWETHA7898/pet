@@ -40,9 +40,31 @@ router.post("/login", async (req, res) => {
 
         const token = jwt.sign({ user: { id: user.id } }, process.env.JWT_SECRET);
         res.json({ success: true, token });
+        console.log(user)
+        console.log(token)
     } catch (error) {
         res.status(401).json({ success: false, error: "Invalid Token" });
     }
 });
 
+
+
+
+router.post("/admin", async (req, res) => {
+    try {
+        const { email, pass } = req.body;
+        console.log(email)
+        console.log(pass)
+
+        if (email === process.env.ADMINEMAIL && pass === process.env.ADMINPASS) {
+            const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: "1h" });
+            return res.json({ success: true, token });
+        }
+
+        res.status(401).json({ success: false, message: "Invalid credentials" });
+    } catch (err) {
+        console.error("Admin login error:", err);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+});
 module.exports = router;

@@ -1,169 +1,172 @@
+/* Centering the signup/login container */
 .loginsignup {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
-    margin-top: 60px;
-    margin-bottom: 100px;
+    height: 100vh; /* Full viewport height */
+    background: #f5f5f5; /* Light background for contrast */
+    padding: 20px;
 }
 
+/* Form container */
 .container {
-    width: 50%; 
-    height: fit-content;
+    width: 40%;
+    max-width: 450px; /* Prevents it from becoming too large */
     background: white;
-    padding: 40px 60px;
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 4px 4px 10px rgba(168, 218, 220, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
     animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Heading styling */
 .container h1 {
-    margin: 20px 0px;
-    font-size: 50px;
+    font-size: 36px;
     color: #A8DADC;
-    text-align: center;
+    margin-bottom: 20px;
 }
 
+/* Form input fields */
 .fields {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 10px;
+    gap: 20px;
+    width: 100%;
 }
 
 .fields input {
     width: 100%;
-    padding: 20px;
-    border: 1px solid black;
-    color: black;
-    background-color: white !important;
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #A8DADC;
     border-radius: 8px;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    font-size: 18px;
+    background: #fff;
+    transition: all 0.3s ease;
 }
 
-
-
-
 .fields input:focus {
-    border-color:#A8DADC;
-   
+    border-color: #A8DADC;
+    box-shadow: 0 0 8px rgba(168, 218, 220, 0.5);
     outline: none;
 }
 
+/* Button styling */
 .container button {
     width: 100%;
-    height: 72px;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
     color: white;
-    background-color: #A8DADC;
-    margin-top: 40px;
+    background: #A8DADC;
     border: none;
-    font-size: 24px;
-    font-weight: 500;
-    cursor: pointer;
     border-radius: 8px;
-    transition: all 0.3s;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.container button:hover {
+    background: #90C3C8;
 }
 
 .container button:active {
-    background-color: #F28D8D;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(69, 123, 157, 0.2);
+    transform: scale(0.98);
 }
 
+/* Login link text */
 .login {
-    margin-top: 20px;
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
 }
 
 .login span {
     color: #A8DADC;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
+.login span:hover {
+    color: #76B6B9;
+}
+
+/* Agreement checkbox text */
 .login-agree {
     display: flex;
     align-items: center;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     color: black;
     gap: 10px;
-    margin-top: 25px;
+    margin-top: 15px;
 }
 
+/* Error message */
 .error {
     color: red;
-    font-size: 20px;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
-
+/* Fade-in animation */
 @keyframes fadeIn {
-    0% { opacity: 0; transform: scale(0.95); }
-    100% { opacity: 1; transform: scale(1); }
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-
-@media(max-width: 800px) {
+/* Responsive Design */
+@media (max-width: 768px) {
     .container {
-        width: 70%;
-        padding: 20px 30px;
+        width: 80%;
+        padding: 30px;
     }
+
+    .container h1 {
+        font-size: 28px;
+    }
+
+    .fields input {
+        padding: 12px;
+    }
+
+    .container button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .login {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
     .container h1 {
         font-size: 24px;
     }
-    .fields {
-        margin-top: 20px;
-    }
-    .fields input {
-        height: 50px;
-    }
-    .container button {
-        height: 50px;
-        font-size: 16px;
-    }
-    .login {
-        font-size: 16px;
-    }
-    .login-agree {
-        font-size: 14px;
-        gap: 10px;
-    }
-}
 
-@media(max-width: 500px) {
-    .container {
-        width: 90%;
-        padding: 10px 20px;
-        margin-top: 30px;
-    }
-    .container h1 {
-        font-size: 22px;
-    }
-    .fields {
-        margin-top: 18px;
-    }
     .fields input {
-        height: 40px;
+        padding: 10px;
     }
+
     .container button {
-        height: 40px;
-        font-size: 16px;
-    }
-    .login {
+        padding: 10px;
         font-size: 14px;
     }
-    .login-agree {
+
+    .login {
         font-size: 12px;
-        gap: 5px;
     }
 }

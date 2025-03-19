@@ -10,7 +10,8 @@ import Login from "./pages/login/login";
 import PlaceOrder from "./pages/place order/order";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Verify from "./pages/verify/verify";
+import UserOrder from "./pages/userorder/userorder";
+
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
         <Route path="/loginsignup" element={<LoginSignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/order" element={<PlaceOrder></PlaceOrder>}/>
-        <Route path="/verify" element={<Verify></Verify>}/>
+        <Route path="/userorder" element={<UserOrder></UserOrder>}/>
+      
       </Routes>
       <Footer />
     </div>

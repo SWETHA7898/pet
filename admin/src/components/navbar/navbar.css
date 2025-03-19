@@ -20,6 +20,15 @@
     font-weight: bold;
     font-size: xx-large;
 }
+.logout{
+    padding: 10px 10px;
+    border-radius: 20px;
+    width: 100px;
+    border: none;
+    outline: none;
+    background: #A8DADC;
+    color: white;
+}
 
 @media(max-width:800px){
     .navbar{
@@ -33,9 +42,7 @@
         font-weight: 500;
         font-size: x-large;
     }
-    .img{
-        width: 20px;
-    }
+   
     p{
         font-size: large;
     }

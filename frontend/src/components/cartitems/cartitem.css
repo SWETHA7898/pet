@@ -67,6 +67,51 @@ hr{
     border-radius: 5px;
 }
 
+/* Quantity Controls */
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 2px solid #A8DADC;
+    border-radius: 5px;
+    padding: 2px;
+    background-color: #ffffff;
+}
+
+/* Decrement (-) and Increment (+) Buttons */
+.decrement, .increment {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #A8DADC;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    border-radius: 3px;
+}
+
+.decrement:hover, .increment:hover {
+    background-color: #75C9C8;
+}
+
+/* Quantity Input */
+.cart-quantity {
+    width: 20px;
+    height: 30px;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    background: transparent;
+    outline: none;
+}
+
 @media(max-width:1024px){
     .cartitems{
        margin: 70px auto;
@@ -85,7 +130,7 @@ hr{
         margin: auto;
     }
     .cart-quantity{
-        width: 40px;
+        width: 20px;
         height: 30px;
     }
     .cart-items-down{

@@ -6,9 +6,12 @@ const OrderSchema = new mongoose.Schema({
     amount: { type: Number, required: true },
     address: { type: Object, required: true },
     phone: { type: String, required: true },
-    status: { type: String, default: "Order is getting packed" },
+    status: { type: String, default: "Order is placed" },
     payment: { type: Boolean, default: false },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    firstName:{type:String,required:true},
+    lastName:{type:String,required:true}
 });
 
-module.exports = mongoose.model("Order", OrderSchema);
+
+module.exports =  mongoose.models.Order||mongoose.model("Order", OrderSchema);

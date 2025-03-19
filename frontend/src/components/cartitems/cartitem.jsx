@@ -1,13 +1,15 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import "./cartitem.css"
 import { StoreContext } from "../../context/store"
 import { assests } from "../../assets/assets/assests"
 import { useNavigate } from "react-router-dom"
 function CartItem() {
-    const { contextvalue, cartitem, removecart,amount } = useContext(StoreContext);
+    const { contextvalue, cartitem, removecart,amount,addcart } = useContext(StoreContext);
     console.log(contextvalue)
     console.log(cartitem)
     const navigate=useNavigate()
+   
+       
     return (
         <div className="cartitems">
             <div className="cartitems-main">
@@ -27,7 +29,13 @@ function CartItem() {
                                 <img src={e.image} alt="" className="cartimg" />
                                 <p>{e.name}</p>
                                 <p>{`\u20B9${e.newprice}`}</p>
-                                <button className="cart-quantity">{cartitem[e.id]}</button>
+                                <div className="quantity-controls">
+                                <button className="decrement" onClick={() => removecart(e.id)}>-</button>
+                                <span className="cart-quantity">{cartitem[e.id]}</span>
+                                <button className="increment" onClick={() => addcart(e.id)}>+</button>
+                            </div>
+                                
+                               
                                 <p>{`\u20B9${e.newprice * cartitem[e.id]}`}</p>
                                 <img
                                     className="remove-icon"
@@ -66,7 +74,7 @@ function CartItem() {
                          </div>
                     </div>
                     <button onClick={()=>navigate('/order')}>Procced to checkout</button>
-             </div>
+              </div>
 
 
 

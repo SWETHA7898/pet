@@ -1,13 +1,15 @@
 import "./order.css";
 import { StoreContext } from "../../context/store";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 function PlaceOrder() {
-    const navigate=useNavigate()
-    const {amount,cartitem,setCart}=useContext(StoreContext)
+    const navigate = useNavigate();
+    
+    const authToken = localStorage.getItem("authToken");
+    const { amount, cartitem, setCart,contextvalue } = useContext(StoreContext);
     const [orderData, setOrderData] = useState({
         firstName: "",
         lastName: "",
@@ -19,99 +21,144 @@ function PlaceOrder() {
         country: "",
         phone: ""
     });
+     
+    useEffect(()=>{
+        if(!authToken){
+            navigate("/cart")
+        }
+        else if(amount()===0){
+            navigate("/cart")
+        }
 
-    // Function to handle input changes
+    },[authToken])
+
+
+
+    // Handle input changes
     const handleChange = (e) => {
         setOrderData({ ...orderData, [e.target.name]: e.target.value });
     };
 
-    // Function to submit the order
-const handleOrderSubmit = async (e) => {
-    e.preventDefault();
+    // Submit order function
+    const handleOrderSubmit = async (e) => {
+        e.preventDefault();
 
-    const authToken = localStorage.getItem("authToken"); // User token for authentication
-    if (!authToken) {
-        toast.error("You must be logged in to place an order.");
-        return;
-    }
-
-    const orderPayload = {
-        items: cartitem,  // Cart items from StoreContext
-        amount: amount(),  // Total price
-        address: {
-            street: orderData.street,
-            city: orderData.city,
-            state: orderData.state,
-            zipCode: orderData.zipCode,
-            country: orderData.country
-        },
-        phone: orderData.phone
-    };
-
-    try {
-        const response = await fetch("http://localhost:3000/orders/placeorder", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": authToken
-            },
-            body: JSON.stringify(orderPayload)
-        });
-
-        const data = await response.json();
-        console.log("Order Response:", data);
-        console.log("order id",data.order.id)
-
-        if (response.ok) {
-            razorPayment(data.order); // Call payment function with order details
-        } else {
-            alert(data.message);
+        if (!authToken) {
+            toast.error("You must be logged in to place an order.");
+            return;
         }
-    } catch (error) {
-        console.error("Error placing order:", error);
-        alert("Something went wrong.");
-    }
-};
-const razorPayment = (order) => {
-    const options = {
-        key: "rzp_test_SmT3UOUcpyxz3T",
-        amount: order.amount * 100,
-        currency: order.currency,
-        description: "Tes payment",
-        order_id: order.id,
-        handler: async function (response) {
-            console.log("Received Payment Response:", response); // Debugging
-        
-            try {
-                const verifyResponse = await axios.post("http://localhost:3000/orders/verify", {
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_order_id: response.razorpay_order_id, // Ensure `order.id` is correct
-                    razorpay_signature: response.razorpay_signature
+        if (Object.keys(cartitem).length === 0) {
+            toast.error("Your cart is empty.");
+            return;
+        }
+
+        // Construct order items without modifying original cartitem
+        let orderItems = [];
+        Object.keys(cartitem).forEach((productId) => {
+            if (cartitem[productId] > 0) {
+                orderItems.push({
+                    productId,
+                    quantity: cartitem[productId],
                 });
-        
-                console.log("Verification Response:", verifyResponse.data);
-                
-                if (verifyResponse.data.success) {
-                    toast.success("Payment verified successfully!");
-                    setCart({})
-                    navigate("/")
-                } else {
-                    toast.error("Payment verification failed!");
-                }
-            } catch (error) {
-                console.error("Error verifying payment:", error.response?.data || error);
-                alert("Payment verification error");
             }
+        });
+        console.log(orderItems)
+
+       
+        const orderPayload = {
+            items: orderItems,
+            firstName:orderData.firstName,
+            lastName:orderData.lastName,
+            amount: amount(),
+            address: {
+                street: orderData.street,
+                city: orderData.city,
+                state: orderData.state,
+                zipCode: orderData.zipCode,
+                country: orderData.country
+            },
+            phone: orderData.phone
+        };
+
+        try {
+            const response = await fetch("http://localhost:3000/orders/placeorder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": authToken
+                },
+                body: JSON.stringify(orderPayload)
+            });
+
+            const data = await response.json();
+            console.log("Order Response:", data);
+
+            if (response.ok) {
+                razorPayment(data.order);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.error("Error placing order:", error);
+            toast.error("Something went wrong.");
         }
-        
     };
 
-    const razorpop = new window.Razorpay(options);
-    razorpop.open();
-};
-
-
-
+    const razorPayment = (order) => {
+        const authToken = localStorage.getItem("authToken"); // Fetch auth-token inside function
+    
+        if (!authToken) {
+            toast.error("Authentication token not found. Please log in again.");
+            return;
+        }
+    
+        const options = {
+            key: "rzp_test_SmT3UOUcpyxz3T",
+            amount: order.amount * 100,
+            currency: order.currency,
+            description: "Test payment",
+            order_id: order.id,
+            handler: async function (response) {
+                console.log("Received Payment Response:", response); // Debugging
+    
+                try {
+                    const verifyResponse = await axios.post(
+                        "http://localhost:3000/orders/verify",
+                        {
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                        },
+                        {
+                            headers: {
+                                "Content-Type": "application/json",
+                                "auth-token": authToken, // Include token in headers
+                            },
+                        }
+                    );
+    
+                    console.log("Verification Response:", verifyResponse.data);
+    
+                    if (verifyResponse.data.success) {
+                        toast.success("Payment verified successfully!");
+                        setCart({});
+                        navigate("/");
+                    } else {
+                        toast.error("Payment verification failed!");
+                    }
+                } catch (error) {
+                    console.error("Error verifying payment:", error.response?.data || error);
+                    toast.error("Payment verification error.");
+                }
+            },
+        };
+    
+        const razorpop = new window.Razorpay(options);
+        razorpop.open();
+    };
+    
+    
+    
     return (
         <form className="placeorder" onSubmit={handleOrderSubmit}>
             <div className="placeorder-left">
@@ -152,7 +199,7 @@ const razorPayment = (order) => {
                             <p>{`\u20B9${amount()}`}</p>
                         </div>
                     </div>
-                    <button type="submit" onClick={handleOrderSubmit}>Proceed to Payment</button>
+                    <button type="submit">Proceed to Payment</button>
                 </div>
             </div>
         </form>

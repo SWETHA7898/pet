@@ -4,6 +4,8 @@ const crypto = require("crypto");
 const { fetchUser } = require("../middleware/authMiddleware");
 const Order = require("../models/Order");
 const User = require("../models/User");
+const mongoose = require("mongoose");
+
 
 const router = express.Router();
 
@@ -16,10 +18,10 @@ const razorpayInstance = new Razorpay({
 // 🔹 Place Order
 router.post("/placeorder", fetchUser, async (req, res) => {
     try {
-        const { items, amount, address, phone } = req.body;
+        const { items, amount, address, phone, firstName, lastName } = req.body;
         const finalAmount = amount * 100;
 
-        try{
+        try {
 
             const order = await razorpayInstance.orders.create({
                 amount: finalAmount,
@@ -38,17 +40,21 @@ router.post("/placeorder", fetchUser, async (req, res) => {
             items,
             amount,
             address,
-            phone
+            phone,
+            firstName,
+            lastName,
         });
 
         await newOrder.save();
-        await User.findOneAndUpdate({_id:req.user.id},{cart:{}})
+        await User.findOneAndUpdate({ _id: req.user.id }, { cart: {} })
 
-        await Order.findOneAndUpdate({ userId: req.user.id }, { payment: true });
 
-        
-       
-        console.log(newOrder)
+
+
+
+
+
+        console.log(req.user.id.toString())
     } catch (error) {
         console.error("Error placing order:", error);
         res.status(500).json({ success: false, message: "Server error" });
@@ -56,7 +62,7 @@ router.post("/placeorder", fetchUser, async (req, res) => {
 });
 
 // 🔹 Verify Payment
-router.post("/verify", async (req, res) => {
+router.post("/verify", fetchUser, async (req, res) => {
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
     const secret = "vxbMnba1bZArbXRG9k46q6GO";
 
@@ -64,16 +70,78 @@ router.post("/verify", async (req, res) => {
         .createHmac("sha256", secret)
         .update(razorpay_order_id + "|" + razorpay_payment_id)
         .digest("hex");
+    try {
+        if (expectedSign === razorpay_signature) {
+            res.status(200).json({ success: true, message: "Payment verified successfully" });
+            const latestOrder = await Order.findOne({ userId: req.user.id })
+                .sort({ createdAt: -1 }); // Get latest order
 
-    if (expectedSign === razorpay_signature) {
-        res.status(200).json({ success: true, message: "Payment verified successfully" });
-     
+            if (latestOrder) {
+                latestOrder.payment = true;
+                await latestOrder.save(); // Save the updated order
+                console.log("Updated Order:", latestOrder);
+            } else {
+                console.log("No order found");
+            }
 
 
-      
-    } else {
-        res.status(400).json({ success: false, message: "Invalid signature" });
+
+
+
+
+        }
+
+        else {
+            res.status(400).json({ success: false, message: "Invalid signature" });
+            await Order.findOneAndDelete({ userId: req.user.Id })
+        }
+    }
+    catch (error) {
+        console.log("error")
+        res.json({ success: false, error })
+    }
+
+
+
+});
+
+
+router.post("/userorder", fetchUser, async (req, res) => {
+    try {
+        console.log("User from token:", req.user);
+
+        const orders = await Order.find({ userId: req.user.id });
+        res.json({ success: true, data: orders });
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
     }
 });
+
+
+router.get("/listorder", async (req, res) => {
+    try {
+        const orders = await Order.find({});
+        res.json({ success: true, data: orders });
+    } catch (error) {
+        console.error("Error fetching orders:", error);
+        res.status(500).json({ success: false, error: "Internal Server Error" });
+    }
+});
+
+
+router.post("/update", async (req, res) => {
+    try {
+        await Order.findByIdAndUpdate(req.body.orderId, { status: req.body.status })
+        res.json({ success: true, message: "Status Updated" })
+    }
+    catch (error) {
+        res.json({ success: false, message: "Status failed" })
+    }
+
+})
+
+
+
 
 module.exports = router;

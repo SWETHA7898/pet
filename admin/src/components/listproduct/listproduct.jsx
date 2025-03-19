@@ -45,7 +45,7 @@ const Listproduct = () => {
             <p>Old Price</p>
             <p>New Price</p>
             <p>Category</p>
-            <p>Description</p> {/* ✅ Added description column */}
+          
             <p>Remove</p>
         </div>
 
@@ -59,7 +59,7 @@ const Listproduct = () => {
                         <p>{`\u20B9${item.oldprice}`}</p>
                         <p>{`\u20B9${item.newprice}`}</p>
                         <p>{item.category}</p>
-                        <p className="truncate">{item.description}</p> {/* ✅ Truncated text for better UI */}
+                      
                         <img
                             src={crossicon}
                             className="removeicon"

@@ -51,6 +51,9 @@ import starticon from "./star_icon.png"
 import dullicon from "./star_dull_icon.png"
 import remove from "./cart_cross_icon.png"
 import menu6 from "./menu5.jpg"
+import bag_icon from "./bag_icon.png"
+import logout_icon from "./logout_icon.png"
+import profile from "./profile_icon.png"
 
 import nav from "./nav_dropdown.png"
 
@@ -82,7 +85,10 @@ export const assests={
     dullicon,
     starticon,
     remove,nav,product16_img,
-    menu6
+    menu6,
+    bag_icon,
+    logout_icon,
+    profile
 }
 
 

@@ -30,6 +30,7 @@ function Login() {
             const user = userCredential.user;
             const firebaseToken = await user.getIdToken();
 
+            console.log(firebaseToken)
             // 🔹 Send Token to Backend
             const response = await axios.post("http://localhost:3000/users/login", {
                 firebaseToken

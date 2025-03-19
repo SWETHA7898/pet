@@ -1,29 +1,19 @@
-.navbar img {
-  width: 50px;
-  border-radius: 50%;
-  
-}
-
+/* Navbar Container */
 .navbar {
   display: flex;
-  align-items: center;  
-  justify-content: space-between;  
- 
-  width: 98%;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   z-index: 100;
   padding: 15px 20px;
   position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: white; 
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-
-  
- 
-  
+  top: 0;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Logo and Header */
 .header {
   display: flex;
   align-items: center;
@@ -38,13 +28,14 @@
   font-size: xx-large;
 }
 
+/* Navbar Menu */
 .navmenu {
   display: flex;
   align-items: center;
-  gap: 25px;  /* Increased spacing for better readability */
+  gap: 25px;
   list-style: none;
-  font-size: 22px;
-  color: #333333;
+  font-size: 20px;
+  color: #333;
 }
 
 .navmenu .active {
@@ -55,30 +46,32 @@
   cursor: pointer;
 }
 
+/* Navbar Right Section */
 .navright {
   display: flex;
   align-items: center;
-  gap: 30px; /* Adjusted spacing */
+  gap: 30px;
 }
 
+/* Login Button */
 .navright button {
-  background: transparent;
-  font-size: 20px;
-  color: white;
+  font-size: 18px;
   border: none;
   border-radius: 50px;
   padding: 10px 25px;
   cursor: pointer;
   transition: 0.3s;
   background-color: #A8DADC;
-  min-width: 120px;  /* Prevents button from shrinking */
+  color: white;
   text-align: center;
+  min-width: 120px;
 }
 
 .navright button:active {
   box-shadow: 4px 4px 10px rgba(168, 218, 220, 0.6);
 }
 
+/* Cart Section */
 .cart {
   position: relative;
   display: flex;
@@ -90,13 +83,55 @@
   width: 15px;
   height: 15px;
   background-color: #F28D8D;
-  border-radius: 11px;
+  border-radius: 50%;
   top: -8px;
   right: -8px;
   text-align: center;
   color: white;
   font-size: 10px;
   padding: 2px;
+}
+
+/* Profile Dropdown */
+.navbar-profile {
+  position: relative;
+  cursor: pointer;
+}
+
+ 
+
+.nav-profile-dropdown {
+  position: absolute;
+ 
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 160px;
+  display: none;
+  flex-direction: column;
+}
+
+.navbar-profile:hover .nav-profile-dropdown {
+  display: flex;
+}
+
+.nav-profile-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  cursor: pointer;
+ 
+}
+
+
+
+
+
+.nav-profile-dropdown li {
+  color:#A8DADC;
+  font-weight: bold;
 }
 
 /* Navbar Dropdown for Small Screens */
@@ -111,109 +146,103 @@
 /* Responsive Adjustments */
 @media screen and (max-width: 900px) {
   .navbar {
-      padding: 12px 20px;
+    padding: 12px 20px;
   }
 
   .header,
   .header span {
-      font-size: x-large;
+    font-size: x-large;
   }
 
   .navmenu {
-      gap: 15px;
-      font-size: 18px;
+    gap: 15px;
+    font-size: 18px;
   }
 
   .navright {
-      gap: 20px;
+    gap: 20px;
   }
 
   .navright button {
-      padding: 8px 18px;
-      font-size: 16px;
+    padding: 8px 18px;
+    font-size: 16px;
   }
 
   .cart .dot {
-      top: -9px;
-      right: -12px;
+    top: -9px;
+    right: -12px;
   }
 }
 
 @media screen and (max-width: 750px) {
   .navbar {
-      padding: 10px;
+    padding: 10px;
   }
 
   .header,
   .header span {
-      font-size: large;
+    font-size: large;
   }
 
   .nav-dropdown {
-      display: block;
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-      object-fit: contain;
-      rotate: -90deg;
-      transition: 0.5s;
+    display: block;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    object-fit: contain;
+    rotate: -90deg;
+    transition: 0.5s;
   }
 
   .cart .dot {
-      top: -9px;
-      right: -12px;
+    top: -9px;
+    right: -12px;
   }
 
   .navmenu {
-    
     position: absolute;
-    display: flex;
-
     flex-direction: column;
     top: 53px;
-    left: -10px;  
+    left: -10px;
     border: 1px solid #ccc;
     border-radius: 2px;
     padding-top: 60px;
     gap: 40px;
-    width: 150px; 
+    width: 150px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     background: #A8DADC;
     height: 100vh;
-
-   
     opacity: 0;
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
     transition: transform 0.5s ease-out, opacity 0.5s ease-out, visibility 0s 0.5s;
-}
+  }
 
-.navmenu-visible {
-    visibility: visible; 
+  .navmenu-visible {
+    visibility: visible;
     opacity: 1;
-    transform: translateX(0); 
+    transform: translateX(0);
     transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-}
-
+  }
 }
 
 @media (max-width: 500px) {
   .navbar {
-      gap: 0;
+    gap: 0;
   }
 
   .header,
   .header span {
-      font-size: x-large;
+    font-size: x-large;
   }
 
   .nav-dropdown {
-      height: 25px;
-      width: 25px;
+    height: 25px;
+    width: 25px;
   }
 
   .cart .dot {
-      top: -9px;
-      right: -12px;
+    top: -9px;
+    right: -12px;
   }
 }

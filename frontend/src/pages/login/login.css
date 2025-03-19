@@ -1,117 +1,105 @@
+/* Centering the login container */
 .logins {
-    width: 100%;
-    padding: 50px;
-    margin-bottom: 100px;
     display: flex;
     justify-content: center;
-    align-items: center; 
-    margin-top: 60px;
-    background: white;
+    align-items: center;
+    height: 100vh;  /* Full-screen height */
+    background: #f5f5f5;  /* Light background for contrast */
+    padding: 20px;
 }
 
+/* Login container styling */
 .logincontainer {
-    width: 50%; 
-    height: fit-content;
+    width: 40%;
+    max-width: 450px;  /* Restrict max width */
     background: white;
-    padding: 40px 60px;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    
-    border-radius: 5px;
-    box-shadow: 4px 4px 10px rgba(168, 218, 220, 0.6);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
     animation: fadeIn 0.5s ease-in-out;
 }
 
+/* Admin panel title */
 .logincontainer h1 {
-    margin: 20px 0px;
-    font-size: 50px;
-    color: #A8DADC;
-    text-align: center;
+    font-size: 36px;
+    color: #A8DADC;  /* Updated to the requested color */
+    margin-bottom: 20px;
 }
 
+/* Input fields styling */
 .loginfields {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    margin-top: 10px;
+    gap: 20px;
     width: 100%;
-}
-
-.loginfields input,
-.logincontainer button {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .loginfields input {
-    padding: 20px;
-    border: 1px solid black;
-    color: black;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    font-size: 18px;
-    background-color: white ;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #A8DADC;
+    border-radius: 8px;
+    background: #fff;
+    transition: all 0.3s ease;
 }
 
+.loginfields input:focus {
+    border-color: #A8DADC;
+    box-shadow: 0 0 8px rgba(168, 218, 220, 0.5);
+    outline: none;
+}
+
+/* Login button styling */
 .logincontainer button {
-    height: 72px;
+    width: 100%;
+    padding: 14px;
+    font-size: 18px;
+    font-weight: bold;
     color: white;
-    background-color: #A8DADC;
-    margin-top: 40px;
+    background: #A8DADC;
     border: none;
-    font-size: 24px;
-    font-weight: 500;
+    border-radius: 8px;
     cursor: pointer;
-    align-items: center;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.logincontainer button:hover {
+    background: #90C3C8;
 }
 
 .logincontainer button:active {
-    background-color: #F28D8D;
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(69, 123, 157, 0.2);
+    transform: scale(0.98);
 }
 
+/* Additional text */
 .loginp {
-    margin-top: 20px;
-    color: black;
-    font-size: 18px;
-    font-weight: 500;
-    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
 }
 
 .loginp span {
     color: #A8DADC;
-    font-weight: 600;
+    font-weight: bold;
     cursor: pointer;
+    transition: color 0.3s;
 }
 
-.loginagree {
-    display: flex;
-    align-items: center;
-    font-size: 18px;
-    font-weight: 500;
-    color: black;
-    gap: 10px;
-    margin-top: 25px;
+.loginp span:hover {
+    color: #76B6B9;
 }
 
-.loginfields input:focus {
-    border-color:#A8DADC;
-   
-    outline: none;
-}
-
+/* Error message */
 .error {
     color: red;
+    font-size: 14px;
     margin-top: 10px;
 }
 
+/* Fade-in animation */
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -124,69 +112,50 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .logincontainer {
-        width: 70%;
-        padding: 20px 30px;
+        width: 80%;
+        padding: 30px;
+    }
+
+    .logincontainer h1 {
+        font-size: 28px;
+    }
+
+    .loginfields input {
+        padding: 12px;
+    }
+
+    .logincontainer button {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .loginp {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logincontainer {
+        width: 90%;
+        padding: 20px;
     }
 
     .logincontainer h1 {
         font-size: 24px;
     }
 
-    .loginfields {
-        margin-top: 20px;
-    }
-
     .loginfields input {
-        height: 50px;
+        padding: 10px;
     }
 
     .logincontainer button {
-        height: 50px;
-        font-size: 16px;
-    }
-
-    .loginp {
-        font-size: 16px;
-    }
-
-    .loginagree {
-        font-size: 14px;
-        gap: 10px;
-    }
-}
-
-@media (max-width: 500px) {
-    .logincontainer {
-        width: 90%;
-        padding: 10px 20px;
-        margin-top: 30px;
-    }
-
-    .logincontainer h1 {
-        font-size: 22px;
-    }
-
-    .loginfields {
-        margin-top: 18px;
-    }
-
-    .loginfields input {
-        height: 40px;
-    }
-
-    .logincontainer button {
-        height: 40px;
-        font-size: 16px;
-    }
-
-    .loginp {
+        padding: 10px;
         font-size: 14px;
     }
 
-    .loginagree {
+    .loginp {
         font-size: 12px;
-        gap: 5px;
     }
 }
