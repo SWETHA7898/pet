@@ -3,6 +3,10 @@ const multer = require("multer");
 const path = require("path");
 
 const router = express.Router();
+const BASE_URL = "https://your-backend.onrender.com"; // Change to your actual backend URL
+
+
+
 
 // 🔹 Multer Storage for Image Uploads
 const storage = multer.diskStorage({
@@ -21,7 +25,7 @@ router.post("/", upload.single("product"), (req, res) => {
 
     res.json({
         success: 1,
-        image_url: `https://pet-backend-tdmx.onrender.com/images/${req.file.filename}` // Updated for production
+        image_url: `${BASE_URL}/images/${req.file.filename}` // Updated for production
     });
 });
 
