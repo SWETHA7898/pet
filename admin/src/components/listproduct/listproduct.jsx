@@ -8,7 +8,7 @@ const Listproduct = () => {
     const [allproducts, setproducts] = useState([]);
 
     const fetchinfo = async () => {
-        await axios.get("http://localhost:3000/products/")
+        await axios.get("https://pet-backend-tdmx.onrender.com/products/")
             .then((res) => {
                 console.log("Fetched Data:", res.data);
                 setproducts(res.data); // Store products in state
@@ -24,7 +24,7 @@ const Listproduct = () => {
 
     const remove = async (id) => {  
         console.log("Deleting product with ID:", id);
-        axios.delete(`http://localhost:3000/products/remove/${id}`)
+        axios.delete(`https://pet-backend-tdmx.onrender.com/products/remove/${id}`)
         .then((res) => {
             console.log("Deleted:", res.data);
             fetchinfo(); 
