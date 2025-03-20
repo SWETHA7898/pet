@@ -21,7 +21,7 @@ router.post("/", upload.single("product"), (req, res) => {
 
     res.json({
         success: 1,
-        image_url: `http://localhost:3000/images/${req.file.filename}` // Updated for production
+        image_url: `https://pet-backend-tdmx.onrender.com/images/${req.file.filename}` // Updated for production
     });
 });
 
