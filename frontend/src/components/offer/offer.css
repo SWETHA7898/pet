@@ -4,7 +4,7 @@
     align-items: center;
     height: 80vh;
     position: relative;
-    background: url("background.jpg") no-repeat center center/cover;
+    background: url("/background.jpg") no-repeat center center/cover;
    
 }
 
