@@ -7,7 +7,7 @@ export const ProductProvider = ({ children }) => {
     const [allproducts, setproducts] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3000/products/")
+        axios.get("https://pet-backend-tdmx.onrender.com/products/")
             .then((res) => setproducts(res.data))
             .catch((err) => console.log("Error fetching products:", err));
     }, []);
