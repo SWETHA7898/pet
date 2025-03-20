@@ -21,6 +21,14 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use('/images', express.static(path.join(__dirname, 'upload/images')));
+app.use(cors({
+  origin: ['https://pet-front-six.vercel.app', 'https://pet-admin-murex.vercel.app'], // Add all frontend URLs
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+
 // 🔹 Serve Images Correctly
 app.use("/images", (req, res, next) => {
     const filePath = path.join(__dirname, "upload/images", req.path);
