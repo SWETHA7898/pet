@@ -14,7 +14,7 @@ function Login({settoken}){
         try{
             e.preventDefault()
 
-            const response=await axios.post("http://localhost:3000/users/admin",{email,pass})
+            const response=await axios.post("https://pet-backend-tdmx.onrender.com/users/admin",{email,pass})
             console.log(response.data.token)
             if(response.data.success){
                 settoken(response.data.token)

@@ -81,7 +81,7 @@ function PlaceOrder() {
         };
 
         try {
-            const response = await fetch("http://localhost:3000/orders/placeorder", {
+            const response = await fetch("https://pet-backend-tdmx.onrender.com/orders/placeorder", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -123,7 +123,7 @@ function PlaceOrder() {
     
                 try {
                     const verifyResponse = await axios.post(
-                        "http://localhost:3000/orders/verify",
+                        "https://pet-backend-tdmx.onrender.com/orders/verify",
                         {
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_order_id: response.razorpay_order_id,

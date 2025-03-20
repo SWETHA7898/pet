@@ -9,7 +9,7 @@ function Order() {
     const { allproducts } = useProducts();
 
     const fetchOrders = async () => {
-        const response = await axios.get("http://localhost:3000/orders/listorder")
+        const response = await axios.get("https://pet-backend-tdmx.onrender.com/orders/listorder")
         if (response.data.success) {
 
             setOrders(response.data.data)
@@ -29,7 +29,7 @@ function Order() {
 
     const status=async(e,orderId)=>{
         console.log(e,orderId)
-        const response=await axios.post("http://localhost:3000/orders/update",{
+        const response=await axios.post("https://pet-backend-tdmx.onrender.com/orders/update",{
             orderId,
             status:e.target.value
         })

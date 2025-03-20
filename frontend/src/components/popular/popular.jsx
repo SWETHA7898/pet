@@ -11,7 +11,7 @@ function Popular() {
   
     useEffect(() => {
       axios
-        .get("http://localhost:3000/products/popular")
+        .get("https://pet-backend-tdmx.onrender.com/products/popular")
         .then((res) => setData(res.data))
         .catch((err) => console.log("err"));
     }, []);
