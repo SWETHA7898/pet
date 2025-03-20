@@ -48,7 +48,7 @@ function ShopCategory(props) {
             </div>
 
             {filteredResults.length === 0 && (
-                <h1>No Items to Show, Try searching with a different value</h1>
+                <h1 style={{marginTop:"20px"}}>No Items to Show, Try searching with a different value</h1>
             )}
 
             <div className="sort-category">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./listproduct.css";
 import crossicon from "../../assets/Admin_Assets/cross_icon.png";
+import { toast } from "react-toastify";
 
 const Listproduct = () => {
     const [allproducts, setproducts] = useState([]);
@@ -27,6 +28,7 @@ const Listproduct = () => {
         .then((res) => {
             console.log("Deleted:", res.data);
             fetchinfo(); 
+            toast.success("Product Removed")
         })
         .catch((err) => {
             console.error("Delete Error:", err);

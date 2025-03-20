@@ -17,7 +17,7 @@
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.6s ease-in-out both;
 }
 
 /* Admin panel title */
@@ -43,8 +43,10 @@
     border-radius: 8px;
     background: #fff;
     transition: all 0.3s ease;
+    animation: inputFade 0.6s ease-in-out both;
 }
 
+/* Input focus effect */
 .loginfields input:focus {
     border-color: #A8DADC;
     box-shadow: 0 0 8px rgba(168, 218, 220, 0.5);
@@ -66,12 +68,15 @@
     margin-top: 20px;
 }
 
+/* Button hover animation */
 .logincontainer button:hover {
     background: #90C3C8;
+    animation: buttonHover 0.3s ease-in-out both;
 }
 
+/* Button click effect */
 .logincontainer button:active {
-    transform: scale(0.98);
+    animation: buttonClick 0.2s ease-in-out both;
 }
 
 /* Additional text */
@@ -99,14 +104,51 @@
     margin-top: 10px;
 }
 
-/* Fade-in animation */
+/* --- Animations --- */
+
+/* Smooth fade-in for the login form */
 @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Input field fade-in effect */
+@keyframes inputFade {
     0% {
         opacity: 0;
         transform: scale(0.95);
     }
     100% {
         opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Button hover effect */
+@keyframes buttonHover {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+/* Button click bounce effect */
+@keyframes buttonClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
         transform: scale(1);
     }
 }

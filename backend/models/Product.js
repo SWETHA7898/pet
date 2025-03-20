@@ -8,7 +8,8 @@ const ProductSchema = new mongoose.Schema({
     newprice: { type: Number, required: true },
     oldprice: { type: Number, required: true },
     available: { type: Boolean, default: true },
-    date: { type: Date, default: Date.now }
+    date: { type: Date, default: Date.now },
+    bestseller: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

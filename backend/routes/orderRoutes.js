@@ -21,6 +21,8 @@ router.post("/placeorder", fetchUser, async (req, res) => {
         const { items, amount, address, phone, firstName, lastName } = req.body;
         const finalAmount = amount * 100;
 
+        console.log(req.user.id)
+
         try {
 
             const order = await razorpayInstance.orders.create({
@@ -73,16 +75,21 @@ router.post("/verify", fetchUser, async (req, res) => {
     try {
         if (expectedSign === razorpay_signature) {
             res.status(200).json({ success: true, message: "Payment verified successfully" });
-            const latestOrder = await Order.findOne({ userId: req.user.id })
-                .sort({ createdAt: -1 }); // Get latest order
-
-            if (latestOrder) {
-                latestOrder.payment = true;
-                await latestOrder.save(); // Save the updated order
-                console.log("Updated Order:", latestOrder);
+            const updatedOrder = await Order.findOneAndUpdate(
+                { userId: req.user.id }, 
+                { $set: { payment: true } }, 
+                { sort: { date: -1 }, new: true } 
+            );
+            
+            if (updatedOrder) {
+                console.log("Updated Order:", updatedOrder);
             } else {
-                console.log("No order found");
+                console.log("No orders found for this user.");
             }
+            
+            
+        
+           
 
 
 

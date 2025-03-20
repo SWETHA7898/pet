@@ -1,4 +1,4 @@
-/* Navbar Container */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -10,10 +10,10 @@
   top: 0;
   left: 0;
   background-color: white;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Logo and Header */
+
 .header {
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@
   font-size: xx-large;
 }
 
-/* Navbar Menu */
+
 .navmenu {
   display: flex;
   align-items: center;
@@ -46,14 +46,14 @@
   cursor: pointer;
 }
 
-/* Navbar Right Section */
+
 .navright {
   display: flex;
   align-items: center;
   gap: 30px;
 }
 
-/* Login Button */
+
 .navright button {
   font-size: 18px;
   border: none;
@@ -71,7 +71,7 @@
   box-shadow: 4px 4px 10px rgba(168, 218, 220, 0.6);
 }
 
-/* Cart Section */
+
 .cart {
   position: relative;
   display: flex;
@@ -92,7 +92,7 @@
   padding: 2px;
 }
 
-/* Profile Dropdown */
+
 .navbar-profile {
   position: relative;
   cursor: pointer;
@@ -134,7 +134,7 @@
   font-weight: bold;
 }
 
-/* Navbar Dropdown for Small Screens */
+
 .nav-dropdown {
   display: none;
 }
@@ -143,7 +143,7 @@
   transform: rotate(90deg);
 }
 
-/* Responsive Adjustments */
+
 @media screen and (max-width: 900px) {
   .navbar {
     padding: 12px 20px;
