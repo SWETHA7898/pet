@@ -3,7 +3,7 @@ const multer = require("multer");
 const path = require("path");
 
 const router = express.Router();
-const BASE_URL = "https://your-backend.onrender.com"; // Change to your actual backend URL
+// Change to your actual backend URL
 
 
 
@@ -25,7 +25,7 @@ router.post("/", upload.single("product"), (req, res) => {
 
     res.json({
         success: 1,
-        image_url: `${BASE_URL}/images/${req.file.filename}` // Updated for production
+        image_url: `http://localhost:3000/images/${req.file.filename}` // Updated for production
     });
 });
 
