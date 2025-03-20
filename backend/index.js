@@ -22,21 +22,11 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/images', express.static( 'upload/images'));
-const allowedOrigins = [
-    'https://pet-admin-murex.vercel.app',
-    'https://pet-front-six.vercel.app'
-];
-
+app.use('/images', express.static(path.join(__dirname, 'upload/images')));
 app.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
-    credentials: true
+  origin: ['https://pet-front-six.vercel.app', 'https://pet-admin-murex.vercel.app'], // Add all frontend URLs
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Database Connection
