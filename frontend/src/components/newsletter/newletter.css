@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 140px;
-    background-image: url('new.jpg');
+    background-image: url('/new.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
