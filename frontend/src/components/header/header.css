@@ -1,7 +1,7 @@
 .hero {
     height: 101vh;
   
-    background-image: url('dog.jpg');
+    background-image: url('/dog.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
