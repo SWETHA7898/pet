@@ -12,7 +12,7 @@ function NewCollection() {
 
     useEffect(() => {
         axios
-            .get("https://pet-backend-tdmx.onrender.com/products/bestsellers")
+            .get("https://pet-pavu.onrender.com/products/bestsellers")
             .then((response) => setNewCollection(response.data))
             .catch((err) => console.log("error", err));
     }, []);
