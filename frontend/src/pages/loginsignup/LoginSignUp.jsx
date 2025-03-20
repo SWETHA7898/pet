@@ -35,7 +35,7 @@ function LoginSignUp() {
             const firebaseToken = await user.getIdToken();
     
             // Send token and user details to backend using Axios
-            const response = await axios.post("https://pet-backend-tdmx.onrender.com/users/signup", {
+            const response = await axios.post("https://pet-pavu.onrender.com/users/signup", {
                 firebaseToken,
                 username: details.name,
                 email: details.email
