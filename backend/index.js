@@ -23,6 +23,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/images', express.static( 'upload/images'));
+app.use(cors({
+  origin: 'https://pet-front-six.vercel.app',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Database Connection
 mongoose.connect(process.env.MONGO_URI)
