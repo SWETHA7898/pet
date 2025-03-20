@@ -36,12 +36,12 @@ const Addproduct = () => {
         let formData = new FormData();
         formData.append("product", image);
 
-        axios.post("https://pet-backend-tdmx.onrender.com/upload/", formData).
+        axios.post("https://pet-pavu.onrender.com/upload/", formData).
             then((response) => {
 
                 console.log(response)
                 productdetails.image = response.data.image_url
-                axios.post("https://pet-backend-tdmx.onrender.com/products/add", productdetails)
+                axios.post("https://pet-pavu.onrender.com/products/add", productdetails)
                     .then((data) => {
                         console.log(data)
                         data.data.success ? toast.success("Product added") : toast.errot("Failed to add")
