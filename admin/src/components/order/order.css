@@ -17,6 +17,9 @@
     flex-direction: column;
     gap: 15px;
     align-items: center;
+     max-height: 500px; /* Set a height to enable scrolling */
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding-right: 10px; /
 }
 
 .listitems {
