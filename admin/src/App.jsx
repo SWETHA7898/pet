@@ -18,7 +18,7 @@ const App = ()=>{
       {token===""?
       <Login settoken={settoken}></Login>:
       <> <ToastContainer/>
-         <Navbar settoken={token}></Navbar>
+         <Navbar settoken={settoken}></Navbar>
          <Admin settoken={token}></Admin></>
       }
     
