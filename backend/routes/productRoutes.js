@@ -35,12 +35,16 @@ router.delete("/remove/:id", async (req, res) => {
 
 router.get("/bestsellers", async (req, res) => {
     try {
-        let bestsellers = await Product.find({ bestseller: true }).limit(8); // Fetch only bestseller products
+        let bestsellers = await Product.find({ bestseller: true })
+            .sort({ createdAt: -1 }) // Sorts newest bestsellers first
+            .limit(8); // Limits the response to 8 products
+
         res.send(bestsellers);
     } catch (err) {
         res.status(500).send({ error: "Failed to fetch bestsellers" });
     }
 });
+
 
 
 // 🔹 Get Popular Dog Products API
