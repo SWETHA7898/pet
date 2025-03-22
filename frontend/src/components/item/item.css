@@ -15,8 +15,8 @@
 }
 .item-prices{
     display: flex;
-  justify-content: center; /* Aligns items vertically */
-    align-items: center; /* Centers items horizontally */
+  justify-content: center; 
+    align-items: center; 
     gap: 5px;
     
     
