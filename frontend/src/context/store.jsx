@@ -25,12 +25,12 @@ const StoreContextProvider = (props) => {
     useEffect(() => {
         axios.get("https://pet-pavu.onrender.com/products/")
             .then((response) => {
-                console.log("✅ Fetched data:", response.data);
+                console.log(" Fetched data:", response.data);
                 setContextvalue(response.data.map(item => ({ ...item, show: true })));
                 
             })
             .catch((error) => {
-                console.error("❌ Error fetching products:", error);
+                console.error(" Error fetching products:", error);
                
             });
     }, []);
@@ -70,7 +70,6 @@ const StoreContextProvider = (props) => {
             [itemId]: (prev[itemId] || 0) + 1
         }));
 
-        // Send request to backend
         try {
             const response = await fetch("https://pet-pavu.onrender.com/cart/add", {
                 method: "POST",
@@ -123,7 +122,7 @@ const StoreContextProvider = (props) => {
                 }
             }
         }
-        console.log("💰 Total Amount:", total);
+        console.log(" Total Amount:", total);
         return total;
     };
 
@@ -134,7 +133,7 @@ const StoreContextProvider = (props) => {
                 item += cartitem[i];
             }
         }
-        console.log("🛒 Total Cart Items:", item);
+        console.log(" Total Cart Items:", item);
         return item;
     };
 
