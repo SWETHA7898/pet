@@ -9,17 +9,17 @@ export function useScrollAnimation() {
             ([entry], observer) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    observer.unobserve(entry.target); // Stop observing after animation triggers
+                    observer.unobserve(entry.target); 
                 }
             },
-            { threshold: 0.2 } // Adjust sensitivity (20% of element must be visible)
+            { threshold: 0.2 } 
         );
 
         if (elementRef.current) {
             observer.observe(elementRef.current);
         }
 
-        return () => observer.disconnect(); // Cleanup on unmount
+        return () => observer.disconnect(); 
     }, []);
 
     return [elementRef, isVisible];
