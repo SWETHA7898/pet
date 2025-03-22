@@ -8,12 +8,12 @@ function ShopCategory(props) {
     const { contextvalue } = useContext(StoreContext);
     const [search, setSearch] = useState("");
     const [filteredResults, setFilteredResults] = useState([]);
-    const [shopRef, isVisible] = useScrollAnimation(); // 🔥 Scroll Hook
+    const [shopRef, isVisible] = useScrollAnimation();
 
     useEffect(() => {
         if (!contextvalue) return;
 
-        // Convert props.category to lowercase for case-insensitive filtering
+       
         const filterCategories = Array.isArray(props.category) 
             ? props.category.map(cat => cat.toLowerCase()) 
             : [props.category.toLowerCase()];
