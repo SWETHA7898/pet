@@ -18,10 +18,10 @@ function Navbar() {
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                console.log("✅ User logged in");
+                console.log(" User logged in");
                 setLog(true);
             } else {
-                console.log("❌ User logged out");
+                console.log(" User logged out");
                 setLog(false);
             }
         });
@@ -30,7 +30,7 @@ function Navbar() {
     function Logout() {
         signOut(auth).then(() => {
             localStorage.removeItem("authToken");
-            console.log("🔴 User logged out, authToken removed");
+            console.log(" User logged out, authToken removed");
             window.location.replace("/");
         }).catch((error) => {
             console.error("Logout error:", error);
