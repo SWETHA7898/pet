@@ -16,7 +16,7 @@ function Products() {
     const product = contextvalue.find((e) => e.id === Number(productID));
 
     if (!product) {
-        return <div>Product not found</div>; // Handles invalid product IDs
+        return <div>Product not found</div>; 
     }
 
     console.log("Found product:", product);
