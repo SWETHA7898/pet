@@ -36,7 +36,7 @@ function Login() {
                 firebaseToken
             });
 
-            console.log("Login Response:", response.data);  // Debugging log
+            console.log("Login Response:", response.data);  
 
             if (response.data.success) {
                 if (response.data.token) {
