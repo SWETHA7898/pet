@@ -1,7 +1,7 @@
 .login{
     display: flex;
-    justify-content: center;  /* Centers horizontally */
-    align-items: center;  /* Centers vertically */
+    justify-content: center;  
+    align-items: center; 
     height: 100vh; 
 }
 .com{
