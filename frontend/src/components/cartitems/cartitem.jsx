@@ -43,7 +43,7 @@ function CartItem() {
                                     alt="Remove"
                                     onClick={() => removecart(e.id)
 
-                                    } // Pass item ID here
+                                    } 
                                 />
                             </div>
                             <hr />
@@ -51,7 +51,7 @@ function CartItem() {
 
                     );
                 }
-                return null; // Add a fallback return to avoid potential React warnings
+                return null; 
             })}
             <div className="cart-items-down">
                 <div className="cart-items-total">
