@@ -33,7 +33,7 @@ hr{
 }
 
 
-/* Explore Menu List */
+
 .explore-menu-list { 
   display: flex;
   justify-content:space-around;
@@ -43,7 +43,7 @@ hr{
   margin: 10px 0;
 }
 
-/* Explore Menu List Item */
+
 .explore-menu-list-item {
   border: 2px solid #A8DADC;
   border-radius: 10px;
@@ -54,7 +54,7 @@ hr{
   cursor: pointer;
 }
 
-/* Image Styling with Smooth Translate Effect */
+
 .explore-menu-list-item img {
   width: 14vw;
   min-width: 80px;
@@ -63,7 +63,7 @@ hr{
   transition: transform 0.3s ease;
 }
 
-/* Text Styling */
+
 .explore-menu-list-item p {
   margin-top: 10px;
   color: #333;
@@ -71,7 +71,8 @@ hr{
   cursor: pointer;
 }
 
-/* Divider Line */
+
+
 .explore-menu hr {
   margin: 10px 0;
   height: 2px;
@@ -103,11 +104,11 @@ hr{
 @keyframes pulse {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 10px rgba(168, 218, 220, 0.7); /* Soft Teal Shadow */
+        box-shadow: 0 0 10px rgba(168, 218, 220, 0.7); 
     }
     100% {
         transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(168, 218, 220, 1); /* Brighter Teal Glow */
+        box-shadow: 0 0 20px rgba(168, 218, 220, 1); 
     }
 }
 @media(max-width:800px) {
