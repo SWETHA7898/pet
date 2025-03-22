@@ -96,10 +96,10 @@
         padding: 20px;
     }
     .addprice {
-        flex-direction: column; /* Stack price fields on small screens */
+        flex-direction: column; 
         gap: 20px;
     }
     .addbutton {
-        width: 100%; /* Make button full-width on smaller screens */
+        width: 100%; 
     }
 }
