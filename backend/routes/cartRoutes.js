@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// 🔹 Add to Cart
+//  Add to Cart
 router.post("/add", fetchUser, async (req, res) => {
     const { itemId } = req.body;
 
@@ -26,7 +26,7 @@ router.post("/add", fetchUser, async (req, res) => {
    
 });
 
-// 🔹 Remove from Cart
+//  Remove from Cart
 router.post("/remove", fetchUser, async (req, res) => {
     const { itemId } = req.body;
     console.log("User:", req.user); 
@@ -46,7 +46,7 @@ router.post("/remove", fetchUser, async (req, res) => {
    
 });
 
-// 🔹 Get Cart
+//  Get Cart
 router.post("/get", fetchUser, async (req, res) => {
     try {
         let user = await User.findById(req.user.id);
