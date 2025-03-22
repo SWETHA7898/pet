@@ -14,7 +14,7 @@ const Addproduct = () => {
         newprice: "",
         oldprice: "",
         image: "",
-        bestseller: false,  // <-- Add Bestseller Field
+        bestseller: false,  
     });
 
 
