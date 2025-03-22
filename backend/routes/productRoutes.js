@@ -3,13 +3,12 @@ const Product = require("../models/Product");
 
 const router = express.Router();
 
-// Get All Products
+
 router.get("/", async (req, res) => {
     let products = await Product.find({});
     res.json(products);
 });
 
-// Add a New Product
 router.post("/add", async (req, res) => {
     try {
         let products = await Product.find({});
@@ -23,7 +22,6 @@ router.post("/add", async (req, res) => {
     }
 });
 
-// Delete Product
 router.delete("/remove/:id", async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
@@ -36,8 +34,8 @@ router.delete("/remove/:id", async (req, res) => {
 router.get("/bestsellers", async (req, res) => {
     try {
         let bestsellers = await Product.find({ bestseller: true })
-            .sort({ date: -1 }) // Sort by newest products first
-            .limit(8); // Keep only the latest 8 bestsellers
+            .sort({ date: -1 }) 
+            .limit(8); 
         res.send(bestsellers);
     } catch (err) {
         res.status(500).send({ error: "Failed to fetch bestsellers" });
@@ -45,7 +43,7 @@ router.get("/bestsellers", async (req, res) => {
 });
 
 
-// 🔹 Get Popular Dog Products API
+
 router.get("/popular", async (req, res) => {
     try {
         let products = await Product.find({ category: "dog" });
