@@ -23,7 +23,7 @@
 .new-collections {
     text-align: center;
     padding: 50px 20px;
-    opacity: 0; /* Initially hidden */
+    opacity: 0; 
     transform: translateY(50px);
     transition: opacity 1s ease-out, transform 1s ease-out;
 }
@@ -36,7 +36,7 @@
 }
 
 
-/* 🔥 Scroll Animation */
+
 .fade {
     opacity: 0;
     transform: translateY(50px);
