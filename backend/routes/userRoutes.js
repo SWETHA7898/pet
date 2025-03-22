@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 
-// User Signup
+
 router.post("/signup", async (req, res) => {
     try {
         const { firebaseToken, username } = req.body;
@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-// User Login
+
 router.post("/login", async (req, res) => {
     try {
         const { firebaseToken } = req.body;
