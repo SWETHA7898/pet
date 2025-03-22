@@ -18,7 +18,7 @@
     background: rgba(0, 0, 0, 0.4);
 }
 
-/* Ensure content is above the overlay */
+
 .offers-left {
     flex: 1;
     display: flex;
@@ -37,10 +37,10 @@
 
 .offers-right img {
     opacity: 0.8;
-    mix-blend-mode: darken; /* or overlay */
+    mix-blend-mode: darken; 
 }
 
-/* Text styles */
+
 .offers-left h1 {
     color: white;
     font-size: 50px;
@@ -57,7 +57,7 @@
     margin-top: 20px;
 }
 
-/* Button styles */
+
 .offers-left button {
     width: 250px;
     height: 70px;
