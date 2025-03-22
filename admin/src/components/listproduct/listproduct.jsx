@@ -11,7 +11,7 @@ const Listproduct = () => {
         await axios.get("https://pet-pavu.onrender.com/products/")
             .then((res) => {
                 console.log("Fetched Data:", res.data);
-                setproducts(res.data); // Store products in state
+                setproducts(res.data); 
             })
             .catch((err) => {
                 console.log("Error fetching products:", err);
@@ -40,7 +40,7 @@ const Listproduct = () => {
         <div className="listproduct">
         <h1>All Products List</h1>
 
-        {/* Header Row */}
+       
         <div className="list-products header">
             <p>Product</p>
             <p>Title</p>
@@ -51,7 +51,6 @@ const Listproduct = () => {
             <p>Remove</p>
         </div>
 
-        {/* Product List */}
         <div className="allproducts">
             {allproducts.length > 0 ? (
                 allproducts.map((item) => (
