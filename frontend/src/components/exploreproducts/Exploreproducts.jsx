@@ -5,7 +5,7 @@ import { useScrollAnimation } from "../../hooks/hooks.js";
 
 
 function Explore({ category, setCategory }) {
-  const [exploreRef, isVisible] = useScrollAnimation(); // Hook for animation
+  const [exploreRef, isVisible] = useScrollAnimation(); 
 
   return (
     <div 
@@ -27,7 +27,7 @@ function Explore({ category, setCategory }) {
               to={item.pet_name.toLowerCase() === "dogs" ? "/dogs" : `/${item.pet_name.toLowerCase()}`} 
               onClick={() => {
                   setCategory(prev => prev === item.pet_name ? "All" : item.pet_name);
-                  window.scrollTo(0, 0); // Scroll to top when clicked
+                  window.scrollTo(0, 0); 
               }}
               style={{ textDecoration: 'none', color: 'inherit' }}
           >
