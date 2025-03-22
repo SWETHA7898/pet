@@ -31,23 +31,22 @@ function LoginSignUp() {
             const userCredential = await createUserWithEmailAndPassword(auth, details.email, details.password);
             const user = userCredential.user;
     
-            // Get Firebase ID token
+         
             const firebaseToken = await user.getIdToken();
     
-            // Send token and user details to backend using Axios
+           
             const response = await axios.post("https://pet-pavu.onrender.com/users/signup", {
                 firebaseToken,
                 username: details.name,
                 email: details.email
             });
     
-            console.log("Signup Response:", response.data);  // Debugging log
-    
+            console.log("Signup Response:", response.data);  
             if (response.data.success) {
                 if (response.data.token) {
-                    // ✅ Store JWT token in localStorage
+                   
                     localStorage.setItem("authToken", response.data.token);
-                    console.log("Token Stored in LocalStorage:", localStorage.getItem("authToken")); // Debugging log
+                    console.log("Token Stored in LocalStorage:", localStorage.getItem("authToken")); 
                 } else {
                     console.error("❌ Token is missing in the response!");
                 }
@@ -59,7 +58,7 @@ function LoginSignUp() {
               
             }
         } catch (error) {
-            console.error("Signup Error:", error); // Log the error
+            console.error("Signup Error:", error); 
             if (error.code === "auth/email-already-in-use") {
                 seterror("This email is already registered. Please log in instead.");
             } else {
