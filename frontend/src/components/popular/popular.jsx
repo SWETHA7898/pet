@@ -7,7 +7,7 @@ import { useScrollAnimation } from "../../hooks/hooks.js";
 
 function Popular() {
     const [data, setData] = useState([]);
-    const [popularRef, isVisible] = useScrollAnimation(); // Hook for animation
+    const [popularRef, isVisible] = useScrollAnimation(); 
   
     useEffect(() => {
       axios
