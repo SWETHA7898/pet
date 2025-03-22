@@ -9,13 +9,12 @@ const mongoose = require("mongoose");
 
 const router = express.Router();
 
-// Initialize Razorpay
 const razorpayInstance = new Razorpay({
     key_id: "rzp_test_SmT3UOUcpyxz3T",
     key_secret: "vxbMnba1bZArbXRG9k46q6GO"
 });
 
-// 🔹 Place Order
+
 router.post("/placeorder", fetchUser, async (req, res) => {
     try {
         const { items, amount, address, phone, firstName, lastName } = req.body;
@@ -36,7 +35,7 @@ router.post("/placeorder", fetchUser, async (req, res) => {
             console.error("Error creating Razorpay order:", razorpayError);
             return res.status(500).json({ success: false, message: "Failed to create payment order" });
         }
-        // Save Order in Database
+     
         const newOrder = new Order({
             userId: req.user.id,
             items,
@@ -63,7 +62,7 @@ router.post("/placeorder", fetchUser, async (req, res) => {
     }
 });
 
-// 🔹 Verify Payment
+
 router.post("/verify", fetchUser, async (req, res) => {
     const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body;
     const secret = "vxbMnba1bZArbXRG9k46q6GO";
