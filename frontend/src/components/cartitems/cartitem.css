@@ -67,7 +67,7 @@ hr{
     border-radius: 5px;
 }
 
-/* Quantity Controls */
+
 .quantity-controls {
     display: flex;
     align-items: center;
@@ -78,7 +78,7 @@ hr{
     background-color: #ffffff;
 }
 
-/* Decrement (-) and Increment (+) Buttons */
+
 .decrement, .increment {
     width: 30px;
     height: 30px;
@@ -99,7 +99,7 @@ hr{
     background-color: #75C9C8;
 }
 
-/* Quantity Input */
+
 .cart-quantity {
     width: 20px;
     height: 30px;
