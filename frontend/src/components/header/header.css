@@ -6,7 +6,7 @@
     background-size: cover;
     background-position: center;
     margin-top: -8px;
-  /* Adjust based on your navbar height */
+
 }
 .hero::before{
     content: "";
