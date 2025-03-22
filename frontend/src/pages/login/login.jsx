@@ -25,13 +25,13 @@ function Login() {
         setError("");
 
         try {
-            // 🔹 Firebase Authentication
+          
             const userCredential = await signInWithEmailAndPassword(auth, details.email, details.password);
             const user = userCredential.user;
             const firebaseToken = await user.getIdToken();
 
             console.log(firebaseToken)
-            // 🔹 Send Token to Backend
+           
             const response = await axios.post("https://pet-pavu.onrender.com/users/login", {
                 firebaseToken
             });
@@ -40,13 +40,13 @@ function Login() {
 
             if (response.data.success) {
                 if (response.data.token) {
-                    // ✅ Store JWT in LocalStorage
+                   
                     localStorage.setItem("authToken", response.data.token);
                     console.log("Token Stored:", localStorage.getItem("authToken"));
                     console.log("added token") 
-                  // Debugging log
+                
                 } else {
-                    console.error("❌ Token missing in response!");
+                    console.error(" Token missing in response!");
                 }
                 toast.success("Welcome Again")
                 navigate("/");
