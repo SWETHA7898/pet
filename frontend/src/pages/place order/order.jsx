@@ -34,12 +34,12 @@ function PlaceOrder() {
 
 
 
-    // Handle input changes
+  
     const handleChange = (e) => {
         setOrderData({ ...orderData, [e.target.name]: e.target.value });
     };
 
-    // Submit order function
+   
     const handleOrderSubmit = async (e) => {
         e.preventDefault();
 
@@ -52,7 +52,7 @@ function PlaceOrder() {
             return;
         }
 
-        // Construct order items without modifying original cartitem
+       
         let orderItems = [];
         Object.keys(cartitem).forEach((productId) => {
             if (cartitem[productId] > 0) {
@@ -105,7 +105,7 @@ function PlaceOrder() {
     };
 
     const razorPayment = (order) => {
-        const authToken = localStorage.getItem("authToken"); // Fetch auth-token inside function
+        const authToken = localStorage.getItem("authToken"); 
     
         if (!authToken) {
             toast.error("Authentication token not found. Please log in again.");
@@ -119,7 +119,7 @@ function PlaceOrder() {
             description: "Test payment",
             order_id: order.id,
             handler: async function (response) {
-                console.log("Received Payment Response:", response); // Debugging
+                console.log("Received Payment Response:", response); 
     
                 try {
                     const verifyResponse = await axios.post(
@@ -132,7 +132,7 @@ function PlaceOrder() {
                         {
                             headers: {
                                 "Content-Type": "application/json",
-                                "auth-token": authToken, // Include token in headers
+                                "auth-token": authToken, 
                             },
                         }
                     );
