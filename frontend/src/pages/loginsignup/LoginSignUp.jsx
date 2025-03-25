@@ -33,6 +33,7 @@ function LoginSignUp() {
     
          
             const firebaseToken = await user.getIdToken();
+            console.log(firebaseToken)
     
            
             const response = await axios.post("https://pet-pavu.onrender.com/users/signup", {
