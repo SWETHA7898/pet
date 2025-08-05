@@ -14,57 +14,45 @@ const defaultCart = () => {
 };
 
 const StoreContextProvider = (props) => {
-    const navigate=useNavigate()
-   
+    const navigate = useNavigate();
     const [cartitem, setCart] = useState(defaultCart());
     const [contextvalue, setContextvalue] = useState([]);
-   
-    
-   
 
     useEffect(() => {
         axios.get("https://pet-pavu.onrender.com/products/")
             .then((response) => {
-                console.log(" Fetched data:", response.data);
+                console.log("Fetched data:", response.data);
                 setContextvalue(response.data.map(item => ({ ...item, show: true })));
-                
             })
             .catch((error) => {
-                console.error(" Error fetching products:", error);
-               
+                console.error("Error fetching products:", error);
             });
     }, []);
+
     useEffect(() => {
         if (localStorage.getItem("authToken")) {
-                        fetch("https://pet-pavu.onrender.com/cart/get", {
-                            method: "POST",
-                            headers: {
-                                Accept: 'application/form-data',
-                                "auth-token": `${localStorage.getItem("authToken")}`,
-                                "Content-Type": "application/json",
-                            },
-                            body: ""
-                        })
-                            .then((response) => response.json())
-                            .then((data) => setCart(data))
-        } 
-        
-    
-       
+            fetch("https://pet-pavu.onrender.com/cart/get", {
+                method: "POST",
+                headers: {
+                    Accept: 'application/form-data',
+                    "auth-token": `${localStorage.getItem("authToken")}`,
+                    "Content-Type": "application/json",
+                },
+                body: ""
+            })
+            .then((response) => response.json())
+            .then((data) => setCart(data));
+        }
     }, []);
-    
 
     const addcart = async (itemId) => {
-       
-      
         const authToken = localStorage.getItem("authToken");
         if (!authToken) {
-             toast.error("Sign In To Add")
-            navigate("/login"); 
+            toast.error("Sign In To Add");
+            navigate("/login");
             return;
         }
 
-       
         setCart((prev) => ({
             ...prev,
             [itemId]: (prev[itemId] || 0) + 1
@@ -83,18 +71,18 @@ const StoreContextProvider = (props) => {
 
             const data = await response.json();
             console.log(data);
-            toast.success("Added to cart")
+            toast.success("Added to cart");
         } catch (error) {
             console.error("Error adding to cart:", error);
         }
     };
-
 
     const removecart = async (itemId) => {
         setCart((prev) => ({
             ...prev,
             [itemId]: Math.max((prev[itemId] || 0) - 1, 0),
         }));
+
         if (localStorage.getItem("authToken")) {
             fetch("https://pet-pavu.onrender.com/cart/remove", {
                 method: "POST",
@@ -103,26 +91,24 @@ const StoreContextProvider = (props) => {
                     "auth-token": `${localStorage.getItem("authToken")}`,
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ "itemId": itemId })
+                body: JSON.stringify({ itemId })
             })
-                .then((response) => response.json())
-                .then((data) => console.log(data))
+            .then((response) => response.json())
+            .then((data) => console.log(data));
         }
-
-
     };
 
     const amount = () => {
         let total = 0;
         for (const item in cartitem) {
             if (cartitem[item] > 0) {
-                const iteminfo = contextvalue.find((product) => product.id === Number(item));
+                const iteminfo = contextvalue.find((product) => product.id === item);
                 if (iteminfo) {
                     total += iteminfo.newprice * cartitem[item];
                 }
             }
         }
-        console.log(" Total Amount:", total);
+        console.log("Total Amount:", total);
         return total;
     };
 
@@ -133,11 +119,20 @@ const StoreContextProvider = (props) => {
                 item += cartitem[i];
             }
         }
-        console.log(" Total Cart Items:", item);
+        console.log("Total Cart Items:", item);
         return item;
     };
 
-    const value = { contextvalue, setContextvalue, cartitem, addcart, removecart, amount, totalcartitems,setCart };
+    const value = {
+        contextvalue,
+        setContextvalue,
+        cartitem,
+        addcart,
+        removecart,
+        amount,
+        totalcartitems,
+        setCart
+    };
 
     return (
         <StoreContext.Provider value={value}>

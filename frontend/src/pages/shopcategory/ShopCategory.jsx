@@ -13,7 +13,6 @@ function ShopCategory(props) {
     useEffect(() => {
         if (!contextvalue) return;
 
-       
         const filterCategories = Array.isArray(props.category) 
             ? props.category.map(cat => cat.toLowerCase()) 
             : [props.category.toLowerCase()];
@@ -48,7 +47,7 @@ function ShopCategory(props) {
             </div>
 
             {filteredResults.length === 0 && (
-                <h1 style={{marginTop:"20px"}}>No Items to Show, Try searching with a different value</h1>
+                <h1 style={{ marginTop: "20px" }}>No Items to Show, Try searching with a different value</h1>
             )}
 
             <div className="sort-category">

@@ -25,13 +25,12 @@ function Login() {
         setError("");
 
         try {
-          
             const userCredential = await signInWithEmailAndPassword(auth, details.email, details.password);
             const user = userCredential.user;
             const firebaseToken = await user.getIdToken();
 
-            console.log(firebaseToken)
-           
+            console.log(firebaseToken);
+
             const response = await axios.post("https://pet-pavu.onrender.com/users/login", {
                 firebaseToken
             });
@@ -40,20 +39,15 @@ function Login() {
 
             if (response.data.success) {
                 if (response.data.token) {
-                   
                     localStorage.setItem("authToken", response.data.token);
                     console.log("Token Stored:", localStorage.getItem("authToken"));
-                    console.log("added token") 
-                
+                    console.log("added token");
                 } else {
-                    console.error(" Token missing in response!");
+                    console.error("Token missing in response!");
                 }
-                toast.success("Welcome Again")
+                toast.success("Welcome Again");
                 navigate("/");
                 window.location.reload();
-            
-
-                
             } else {
                 setError(response.data.error || "Login failed");
             }
@@ -64,7 +58,7 @@ function Login() {
             } else if (err.code === "auth/wrong-password") {
                 setError("Incorrect password. Try again.");
             } else {
-                setError("Login failed.Try Again");
+                setError("Login failed. Try Again");
             }
         }
     };

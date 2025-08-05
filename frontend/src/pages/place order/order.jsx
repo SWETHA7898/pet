@@ -9,7 +9,7 @@ function PlaceOrder() {
     const navigate = useNavigate();
     
     const authToken = localStorage.getItem("authToken");
-    const { amount, cartitem, setCart,contextvalue } = useContext(StoreContext);
+    const { amount, cartitem, setCart, contextvalue } = useContext(StoreContext);
     const [orderData, setOrderData] = useState({
         firstName: "",
         lastName: "",
@@ -22,24 +22,16 @@ function PlaceOrder() {
         phone: ""
     });
      
-    useEffect(()=>{
-        if(!authToken){
-            navigate("/cart")
+    useEffect(() => {
+        if (!authToken || amount() === 0) {
+            navigate("/cart");
         }
-        else if(amount()===0){
-            navigate("/cart")
-        }
+    }, [authToken]);
 
-    },[authToken])
-
-
-
-  
     const handleChange = (e) => {
         setOrderData({ ...orderData, [e.target.name]: e.target.value });
     };
 
-   
     const handleOrderSubmit = async (e) => {
         e.preventDefault();
 
@@ -47,12 +39,7 @@ function PlaceOrder() {
             toast.error("You must be logged in to place an order.");
             return;
         }
-        if (Object.keys(cartitem).length === 0) {
-            toast.error("Your cart is empty.");
-            return;
-        }
 
-       
         let orderItems = [];
         Object.keys(cartitem).forEach((productId) => {
             if (cartitem[productId] > 0) {
@@ -62,13 +49,11 @@ function PlaceOrder() {
                 });
             }
         });
-        console.log(orderItems)
 
-       
         const orderPayload = {
             items: orderItems,
-            firstName:orderData.firstName,
-            lastName:orderData.lastName,
+            firstName: orderData.firstName,
+            lastName: orderData.lastName,
             amount: amount(),
             address: {
                 street: orderData.street,
@@ -105,13 +90,13 @@ function PlaceOrder() {
     };
 
     const razorPayment = (order) => {
-        const authToken = localStorage.getItem("authToken"); 
-    
+        const authToken = localStorage.getItem("authToken");
+
         if (!authToken) {
             toast.error("Authentication token not found. Please log in again.");
             return;
         }
-    
+
         const options = {
             key: "rzp_test_SmT3UOUcpyxz3T",
             amount: order.amount * 100,
@@ -119,8 +104,8 @@ function PlaceOrder() {
             description: "Test payment",
             order_id: order.id,
             handler: async function (response) {
-                console.log("Received Payment Response:", response); 
-    
+                console.log("Received Payment Response:", response);
+
                 try {
                     const verifyResponse = await axios.post(
                         "https://pet-pavu.onrender.com/orders/verify",
@@ -132,13 +117,13 @@ function PlaceOrder() {
                         {
                             headers: {
                                 "Content-Type": "application/json",
-                                "auth-token": authToken, 
+                                "auth-token": authToken,
                             },
                         }
                     );
-    
+
                     console.log("Verification Response:", verifyResponse.data);
-    
+
                     if (verifyResponse.data.success) {
                         toast.success("Payment verified successfully!");
                         setCart({});
@@ -152,13 +137,11 @@ function PlaceOrder() {
                 }
             },
         };
-    
+
         const razorpop = new window.Razorpay(options);
         razorpop.open();
     };
-    
-    
-    
+
     return (
         <form className="placeorder" onSubmit={handleOrderSubmit}>
             <div className="placeorder-left">
@@ -182,7 +165,7 @@ function PlaceOrder() {
 
             <div className="placeorder-right">
                 <div className="items-total">
-                    <h1> Cart Total</h1>
+                    <h1>Cart Total</h1>
                     <div>
                         <div className="items">
                             <p>Subtotal</p>
